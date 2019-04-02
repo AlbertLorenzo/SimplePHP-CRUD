@@ -1,5 +1,5 @@
 <?php
-require 'crud.php';
+require 'dbc.php';
 
 function createInstance() {
     $connection = Connection::getInstance();
