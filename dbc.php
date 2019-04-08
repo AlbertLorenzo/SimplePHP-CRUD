@@ -20,11 +20,7 @@ class Connection {
     
     #Constructor
     private function __construct() {
-        $this->_connection = new mysqli($this->_host, $this->_username, $this->_password, $this->_database);
-    
-        if (!$this->_connection) { 
-            die ("Error al conectar con: ".$this->_database);
-        }
+        $this->_connection = new mysqli($this->_host, $this->_username, $this->_password, $this->_database) or die ("Error al conectar con: ".$this->_database);
     }
     
     #Evita el duplicado de la conexión
