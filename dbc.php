@@ -34,6 +34,11 @@ class Connection {
     public function nullInstance() {
         $this->$_instance = null;
     }
+	
+    #Devuelve la conexión mysql
+    public function getConnection() {
+    	return $this->_connection;
+    }
 
     #Cierra la conexión mysqli
     public function closeConnection() {
@@ -42,7 +47,7 @@ class Connection {
 
     #Insertar
     public function insertSQL($table, $param) {
-        $result = $this->_connection->query("INSERT INTO {$table} VALUES (NULL, {$param})") or die ($this->_connection->error);
+        $result = $this->getConnection()->query("INSERT INTO {$table} VALUES (NULL, {$param})") or die ($this->_connection->error);
         if ($result) {
             return true;
         } else {
@@ -52,7 +57,7 @@ class Connection {
 
     #Borrar
     public function removeSQL($table, $param) {
-    $result = $this->_connection->query("DELETE FROM {$table} WHERE {$param}") or die ($this->_connection->error);
+    $result = $this->getConnection()->query("DELETE FROM {$table} WHERE {$param}") or die ($this->_connection->error);
         if ($result) {
             return true;
         } else {
@@ -62,7 +67,7 @@ class Connection {
 
     #Actualizar
     public function updateSQL($table, $fields, $param) {
-    $result = $this->_connection->query("UPDATE {$table} SET {$fields} WHERE {$param}") or die ($this->_connection->error);
+    $result = $this->getConnection()->query("UPDATE {$table} SET {$fields} WHERE {$param}") or die ($this->_connection->error);
         if ($result) {
             return true;
         } else {
@@ -72,7 +77,7 @@ class Connection {
 	
     #Leer, devuelve array asociativo
     public function readSQL($table, $param) {
-    $result = $this->_connection->query("SELECT * FROM {$table} WHERE {$param}") or die($this->_connection->error);
+    $result = $this->getConnection()->query("SELECT * FROM {$table} WHERE {$param}") or die($this->_connection->error);
         if ($result) {
             $data = Array();
                 while($row = $result->fetch_array()) {
